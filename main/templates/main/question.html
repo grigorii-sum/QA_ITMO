@@ -1,0 +1,42 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>Вопрос</h1>
+    <div class="alert alert-warning mt-2">
+        <h2>{{ question.title }}</h2>
+        <p>{{ question.description }}</p>
+        {% if element.author_id != None %}
+            <h6>опубликован {{ question.created_date }} пользователем {{ question.author_id }}</h6>
+        {% else %}
+            <h6>опубликован {{ question.created_date }} пользователем <i>Страница пользователя недоступна</i></h6>
+        {% endif %}
+    </div>
+    {% if answers %}
+        <h1>Ответы</h1>
+        {% for element in answers %}
+            <div class="alert alert-warning mt-2">
+                {% if element.author_id != None %}
+                    <h2>{{ element.author_id }}</h2>
+                {% else %}
+                    <h2><i>Страница пользователя недоступна</i></h2>
+                {% endif %}
+                <p>{{ element.text }}</p>
+                <h6>опубликован {{ element.created_date }}</h6>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Пока нет ни одного ответа, Вы будете первым!</p>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.text }}<br>
+            <button type="submit" class="btn btn-success">Опубликовать ответ</button>
+            <span>{{ error }}</span>
+        </form><br>
+    {% endif %}
+{% endblock %}

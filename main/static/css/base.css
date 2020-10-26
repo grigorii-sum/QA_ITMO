@@ -1,0 +1,258 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Arial", serif;
+}
+
+.logo {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.title {
+    font-size: 50px;
+    margin-left: 100px;
+    margin-top: -70px;
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    height: 150px;
+    width: 100%;
+    background: linear-gradient(to bottom,  #BA8DC2 11%,#ffffff 100%);
+    color: #00A38F;
+}
+
+/*---body---*/
+.body_welcome_page {
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    width: 100%;
+    background-color: white;
+}
+
+.body_login_register {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    width: 100%;
+    background-color: white;
+}
+
+.body_question_or_search_question {
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    width: 80%;
+    background-color: white;
+}
+
+.body_create_question {
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    width: 100%;
+    background-color: white;
+}
+
+.body_questions_list {
+    position: absolute;
+    top: 150px;
+    width: 50%;
+    background-color: white;
+}
+
+.body_participants_top {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    width: 50%;
+}
+
+/*---button---*/
+.button_join {
+    position: absolute;
+    font-size: 20px;
+    background-color: #BA8DC2;
+    color: white;
+    border: 0;
+    padding: 10px 20px;
+    margin-right: 15px;
+    left: 15%;
+}
+
+.button_input {
+    font-size: 20px;
+    background-color: #BA8DC2;
+    color: white;
+    border: 0;
+    padding: 10px 20px;
+    margin-right: 15px;
+}
+
+.button_register {
+    position: absolute;
+    left: 5%;
+    font-size: 20px;
+    background-color: #BA8DC2;
+    color: white;
+    border: 0;
+    padding: 10px 20px;
+    margin-right: 15px;
+}
+
+.button_send {
+    position: absolute;
+    font-size: 20px;
+    height: 50px;
+    background-color: #BA8DC2;
+    color: white;
+    border: 0;
+    padding: 10px 20px;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+.button_search {
+    position: absolute;
+    font-size: 20px;
+    height: 50px;
+    left: 86%;
+    background-color: #BA8DC2;
+    color: white;
+    border: 0;
+    padding: 10px 20px;
+    margin-top: 0;
+    margin-left: 10px;
+}
+
+.button_add_question {
+    position: absolute;
+    bottom: 2%;
+    left: 1%;
+    font-size: 20px;
+    height: 50px;
+    background-color: #BA8DC2;
+    color: white;
+    border: 0;
+    padding: 10px 20px;
+    margin-top: 0;
+}
+
+/*---other---*/
+.special_title {
+    font-size: 45px;
+    color: #00A38F;
+}
+
+.input_small {
+    border: 0;
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.input_big {
+    width: 600px;
+    height: 50px;
+    font-size: 30px;
+    color: #BA8DC2;
+    margin-bottom: 20px;
+}
+
+.input_search {
+    position: absolute;
+    width: 450px;
+    height: 50px;
+    border: 0;
+    left: 50%;
+    font-size: 30px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    color: #BA8DC2;
+}
+
+.text_create_question {
+    width: 600px;
+    height: 200px;
+    font-size: 20px;
+}
+
+.small_text {
+    font-size: 20px;
+    color: black;
+}
+
+.big_text {
+    font-size: 30px;
+    color: black;
+}
+
+.write_answer {
+    width: 100%;
+    height: 90px;
+    margin-bottom: 10px;
+    color: black;
+    border: 5px solid #00A38F;
+    font-size: 20px;
+}
+
+.question_answer {
+    border: 5px solid #00A38F;
+    padding: 15px;
+    margin-bottom: 5%;
+}
+
+.list {
+    margin-left: 10px;
+}
+
+li {
+    list-style-type: none;
+}
+
+.new_questions_or_top_participants {
+    width: 48%;
+    border: 0;
+    font-size: 30px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    color: #00A38F;
+}
+
+.label_input_search {
+    margin-left: 800px;
+}
+
+.page-header {
+    background-color: green;
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+}
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+    color: #ffffff;
+    font-size: 36pt;
+    text-decoration: none;
+}
+
+.content {
+    margin-left: 40px;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Lobster', cursive;
+}
+
+.date {
+    color: #828282;
+}
+
+.save {
+    float: right;
+}

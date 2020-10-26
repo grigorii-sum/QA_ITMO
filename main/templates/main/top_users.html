@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>Топ 10 пользователей</h1>
+    {% if users %}
+        {% for element in users %}
+            <div class="alert alert-warning mt-2">
+                <h2>{{ element.username }}</h2>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Пока нет ни одного пользователя!</p>
+    {% endif %}
+{% endblock %}
