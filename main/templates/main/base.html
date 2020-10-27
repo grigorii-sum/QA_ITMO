@@ -1,35 +1,38 @@
-{% load static %}
+<!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-<!--        <img style="image" src="{% static "images/logo.jpg" %}" height="50px" width="50px" alt="">-->
-        <h2 class="my-0 mr-md-auto font-weight-normal">Q&A ITMO</h2>
-        {% if user.is_authenticated %}
-            <h5 class="my-1 mr-md-auto font-weight-normal">пользователь <strong>{{ request.user }}</strong> в сети</h5>
-        {% endif %}
-        <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark" href="{% url 'new' %}">Новые вопросы</a>
-            <a class="p-2 text-dark" href="{% url 'search' %}">Поиск</a>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+            <h1 class="my-0 mr-md-auto font-weight-normal">Q&A ITMO</h1>
+
             {% if user.is_authenticated %}
-                <a class="p-2 text-dark" href="{% url 'top' %}">Топ пользователей</a>
-                <a class="p-2 text-dark" href="{% url 'create' %}">Создать вопрос</a>
-                <a class="p-2" href="{% url 'logout' %}">Выйти</a>
-            {% else %}
-                <a class="p-2" href="{% url 'login' %}">Вход</a>
-                <a class="p-2" href="{% url 'register' %}">Регистрация</a>
+                <h5 class="my-1 mr-md-auto font-weight-normal">пользователь <strong>{{ request.user }}</strong> в сети</h5>
             {% endif %}
-        </nav>
-    </div>
-    <div class="container">
-        {% block content %}{% endblock %}
-    </div>
-</body>
+
+            <nav class="my-2 my-md-0 mr-md-3">
+                <a class="alert alert-secondary mt-2" href="{% url 'new' %}">Новые вопросы</a>
+                <a class="alert alert-secondary mt-2" href="{% url 'search' %}">Поиск</a>
+                {% if user.is_authenticated %}
+                    <a class="alert alert-secondary mt-2" href="{% url 'top' %}">Топ 10 пользователей</a>
+                    <a class="alert alert-secondary mt-2" href="{% url 'create' %}">Создать вопрос</a>
+                    <a class="alert alert-danger mt-2" href="{% url 'logout' %}">Выйти</a>
+                {% else %}
+                    <a class="alert alert-warning mt-2" href="{% url 'login' %}">Вход</a>
+                    <a class="alert alert-warning mt-2" href="{% url 'register' %}">Регистрация</a>
+                {% endif %}
+            </nav>
+        </div>
+
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
 </html>

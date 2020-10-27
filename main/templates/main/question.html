@@ -6,13 +6,13 @@
 
 {% block content %}
     <h1>Вопрос</h1>
-    <div class="alert alert-warning mt-2">
+    <div class="alert alert-success mt-2">
         <h2>{{ question.title }}</h2>
         <p>{{ question.description }}</p>
         {% if element.author_id != None %}
-            <h6>опубликован {{ question.created_date }} пользователем {{ question.author_id }}</h6>
+            <h6>опубликован <strong>{{ question.created_date }}</strong> пользователем <strong>{{ question.author_id }}</strong></h6>
         {% else %}
-            <h6>опубликован {{ question.created_date }} пользователем <i>Страница пользователя недоступна</i></h6>
+            <h6>опубликован <strong>{{ question.created_date }}</strong> пользователем <i>Страница пользователя недоступна</i></h6>
         {% endif %}
     </div>
     {% if answers %}
@@ -25,7 +25,7 @@
                     <h2><i>Страница пользователя недоступна</i></h2>
                 {% endif %}
                 <p>{{ element.text }}</p>
-                <h6>опубликован {{ element.created_date }}</h6>
+                <h6>опубликован <strong>{{ element.created_date }}</strong></h6>
             </div>
         {% endfor %}
     {% else %}

@@ -1,9 +1,7 @@
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.shortcuts import render, redirect
-
-from django.contrib.auth import authenticate, login, logout
-from pyexpat.errors import messages
 
 from .forms import QuestionForm, AnswerForm, SearchForm, CreateUserForm
 from .models import Question, Answer
@@ -18,6 +16,7 @@ def register_page(request):
             form.save()
             return redirect('login')
     context = {
+        'title': 'Регистрация',
         'form': form
     }
     return render(request, 'main/register.html', context)
@@ -35,16 +34,20 @@ def login_page(request):
             login(request, user)
             return redirect('new')
 
-    context = {}
+    context = {
+        'title': 'Вход',
+    }
     return render(request, 'main/login.html', context)
 
 
 def logout_user(request):
+
     logout(request)
     return redirect('login')
 
 
 def new_questions(request):
+
     questions = Question.objects.order_by('-created_date')[:5]
     context = {
         'title': 'Новые вопросы',
@@ -54,22 +57,28 @@ def new_questions(request):
 
 
 def top_users(request):
+
     users = User.objects.all()[:10]
     context = {
-        'title': 'Топ пользователей',
+        'title': 'Топ 10 пользователей',
         'users': users,
     }
     return render(request, 'main/top_users.html', context)
 
 
 def search_question(request):
+
     error = ''
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
-            # results = Question.objects.all()
-            # query = request.POST.get('q', None)
-            return redirect('result')
+            query = request.POST.get('title')
+            results = Question.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
+            context = {
+                'title': 'Результаты поиска',
+                'results': results,
+            }
+            return render(request, 'main/result_search_question.html', context)
         else:
             error = 'Сначала введите поисковый запрос'
     form = SearchForm()
@@ -83,38 +92,14 @@ def search_question(request):
 
 def result_search_question(request):
 
-    # def get_queryset(self, request):
-    #     # Получаем не отфильтрованный кверисет всех моделей
-    #     queryset = Question.objects.all()
-    #     q = self.request.GET.get("q")
-    #     if q:
-    #         # Если 'q' в GET запросе, фильтруем кверисет по данным из 'q'
-    #         results = queryset.filter(Q(title__icontains=q) | Q(description__icontains=q))
-    #         context = {
-    #             'title': 'Результаты запроса',
-    #             'results': results,
-    #         }
-    #         return render(request, 'main/result_search_question.html', context)
-    #     results = queryset
-    #     context = {
-    #         'title': 'Результаты запроса',
-    #         'results': results,
-    #     }
-    #     return render(request, 'main/result_search_question.html', context)
-
-    # query = request.POST.get('q')
-    results = Question.objects.filter(Q(title__icontains='q') | Q(description__icontains='q'))
-    # results = list(chain(*query_set))
-    # results.sort(key=lambda x: x.created_date, reverse=True)
-    # results = query_set
     context = {
         'title': 'Результаты запроса',
-        'results': results,
     }
     return render(request, 'main/result_search_question.html', context)
 
 
 def create_question(request):
+
     error = ''
     if request.method == "POST":
         form = QuestionForm(request.POST)
@@ -136,6 +121,7 @@ def create_question(request):
 
 
 def question(request, id):
+
     error = ''
     if request.method == 'POST':
         form = AnswerForm(request.POST)

@@ -1,7 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm, TextInput, Textarea
-from django import forms
 
 from .models import Question, Answer
 
@@ -50,28 +49,7 @@ class SearchForm(ModelForm):
         fields = ["title"]
         widgets = {
             "title": TextInput(attrs={
-                'name': 'q',
                 'class': 'form-control',
                 'placeholder': 'Введите заголовок'
             }),
         }
-
-
-# class AuthUserForm(AuthenticationForm, ModelForm):
-#
-#     class Meta:
-#         model = User
-#         fields = ("username", "password",)
-#
-#
-# class RegisterUserForm(ModelForm):
-#
-#     class Meta:
-#         model = User
-#         fields = ("username", "password",)
-#
-#
-# class SearchForm(ModelForm):
-#
-#     class Meta:
-#         model = Question

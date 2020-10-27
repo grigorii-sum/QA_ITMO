@@ -9,13 +9,13 @@
     {% if questions %}
         {% for element in questions %}
             <a href="/question/{{ element.id }}">
-                <div class="alert alert-warning mt-2">
+                <div class="alert alert-success mt-2">
                     <h2>{{ element.title }}</h2>
-                    <p>{{ element.description|truncatechars:"130" }}</p>
+                    <p>{{ element.description|truncatechars:"120" }}</p>
                     {% if element.author_id != None %}
-                        <h6>опубликован {{ element.created_date }} пользователем {{ element.author_id }}</h6>
+                        <h6>опубликован <strong>{{ element.created_date }}</strong> пользователем <strong>{{ element.author_id }}</strong></h6>
                     {% else %}
-                        <h6>опубликован {{ element.created_date }} пользователем <i>Страница пользователя недоступна</i></h6>
+                        <h6>опубликован <strong>{{ element.created_date }}</strong> пользователем <i>Страница пользователя недоступна</i></h6>
                     {% endif %}
                 </div>
             </a>
