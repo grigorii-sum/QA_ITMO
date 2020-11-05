@@ -9,7 +9,7 @@
     <div class="alert alert-success mt-2">
         <h2>{{ question.title }}</h2>
         <p>{{ question.description }}</p>
-        {% if element.author_id != None %}
+        {% if question.author_id != None %}
             <h6>опубликован <strong>{{ question.created_date }}</strong> пользователем <strong>{{ question.author_id }}</strong></h6>
         {% else %}
             <h6>опубликован <strong>{{ question.created_date }}</strong> пользователем <i>Страница пользователя недоступна</i></h6>
