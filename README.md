@@ -1,5 +1,3 @@
-# QA_ITMO
-
 ## IMPORTANT
 
 pip3 install django
