@@ -1,6 +1,8 @@
 # QA_ITMO
 
-### important
+## IMPORTANT
+
+pip3 install django
 
 virtualenv venv
 
@@ -12,7 +14,7 @@ python3 manage.py migrate
 
 python3 manage.py runserver
 
-### not important
+## NOT IMPORTANT
 
 coverage run --source='./main' manage.py test .
 
