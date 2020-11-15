@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>Новые вопросы</h1>
+    {% if questions %}
+        {% for element in questions %}
+            <a href="/question/{{ element.id }}">
+                <div class="alert alert-success mt-2">
+                    <h2>{{ element.title }}</h2>
+                    <p>{{ element.description|truncatechars:"120" }}</p>
+                    {% if element.author_id != None %}
+                        <h6>опубликован <strong>{{ element.created_date }}</strong> пользователем <strong>{{ element.author_id }}</strong></h6>
+                    {% else %}
+                        <h6>опубликован <strong>{{ element.created_date }}</strong> пользователем <i>Страница пользователя недоступна</i></h6>
+                    {% endif %}
+                </div>
+            </a>
+        {% endfor %}
+    {% else %}
+        <p>Пока нет ни одного вопроса!</p>
+    {% endif %}
+{% endblock %}
