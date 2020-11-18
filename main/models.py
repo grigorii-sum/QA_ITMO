@@ -6,10 +6,10 @@ from django.utils import timezone
 
 class ExtendedUser(models.Model):
     user_id = models.CharField(max_length=100)
-    count_answer = models.IntegerField()
+    count_answer = models.IntegerField(null=False)
 
     def __str__(self):
-        return self.count_answer
+        return str(self.count_answer)
 
     @classmethod
     def create(cls, user_id):
