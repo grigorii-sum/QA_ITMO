@@ -33,22 +33,4 @@ class NewQuestionsViewTest(TestCase):
 
         self.assertEqual(resp.status_code, 200)
 
-    def test_create_question_view(self):
-        c = Client()
-        context = {
-            'title': 'question 1',
-            'description': 'this is the best question',
-        }
-        resp = c.post('/create-question', context)
-
-        self.assertEqual(resp.status_code, 200)
-
-    def test_question_view(self):
-        c = Client()
-        context = {
-            'text': 'this is the best answer',
-        }
-        resp = c.post('/question/<int:id>', context)
-
-        self.assertEqual(resp.status_code, 200)
 
