@@ -53,7 +53,7 @@ class Answer(models.Model):
     text = models.TextField()
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
     created_date = models.DateTimeField(default=timezone.now)
-    # is_best = models.BooleanField(default=False)
+    is_best = models.BooleanField(default=False)
 
     def __str__(self):
         return self.text

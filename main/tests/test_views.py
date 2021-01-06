@@ -1,7 +1,7 @@
 from django.test import Client, TestCase
 
 
-class NewQuestionsViewTest(TestCase):
+class ViewsTest(TestCase):
 
     def test_register_page_view(self):
         c = Client()

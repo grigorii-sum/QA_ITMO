@@ -12,6 +12,7 @@
                 <div class="alert alert-success mt-2">
                     <h2>{{ element.title }}</h2>
                     <p>{{ element.description|truncatechars:"120" }}</p>
+                    <hr>
                     {% if element.author_id != None %}
                         <h6>опубликован <strong>{{ element.created_date }}</strong> пользователем <strong>{{ element.author_id }}</strong></h6>
                     {% else %}

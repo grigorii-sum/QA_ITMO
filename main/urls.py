@@ -12,5 +12,6 @@ urlpatterns = [
     path('result-search-question', views.result_search_question, name='result'),
     path('create-question', views.create_question, name='create'),
     path('question/<int:id>', views.question, name='question'),
-    # path('question_with_best_answer/<int:id>', views.question_with_best_answer, name='best'),
+    path('choose-best-answer/<int:id>', views.choose_best_answer, name='best'),
+    path('change_answer_status/<int:id>', views.change_answer_status, name='change'),
 ]

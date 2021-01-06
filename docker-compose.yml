@@ -1,0 +1,14 @@
+version: '3'
+services:
+  web:
+    container_name: QA_ITMO
+    build: .
+    restart: on-failure
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./src:/site/src"
+
+  ubuntu:
+    container_name: ubuntu_container
+    image: "ubuntu"

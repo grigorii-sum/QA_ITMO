@@ -55,3 +55,9 @@ class SearchForm(ModelForm):
         }
 
 
+class UpdateForm(ModelForm):
+
+    class Meta:
+        model = Answer
+        fields = ["is_best"]
+

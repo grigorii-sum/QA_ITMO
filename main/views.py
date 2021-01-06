@@ -1,13 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 from django.shortcuts import render, redirect
 
-from .forms import QuestionForm, AnswerForm, SearchForm, CreateUserForm
+from .forms import CreateUserForm, QuestionForm, AnswerForm, SearchForm, UpdateForm
 from .models import ExtendedUser, Question, Answer
 
 
 def register_page(request):
-
     form = CreateUserForm()
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
@@ -25,7 +25,6 @@ def register_page(request):
 
 
 def login_page(request):
-
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -43,13 +42,11 @@ def login_page(request):
 
 
 def logout_user(request):
-
     logout(request)
     return redirect('login')
 
 
 def new_questions(request):
-
     questions = Question.objects.order_by('-created_date')[:5]
     context = {
         'title': 'Новые вопросы',
@@ -58,8 +55,8 @@ def new_questions(request):
     return render(request, 'main/new_questions.html', context)
 
 
+@login_required
 def top_users(request):
-
     extended_users = ExtendedUser.objects.order_by('-count_answer')[:10]
     context = {
         'title': 'Топ 10 пользователей',
@@ -69,7 +66,6 @@ def top_users(request):
 
 
 def search_question(request):
-
     error = ''
     if request.method == 'POST':
         form = SearchForm(request.POST)
@@ -93,15 +89,14 @@ def search_question(request):
 
 
 def result_search_question(request):
-
     context = {
         'title': 'Результаты запроса',
     }
     return render(request, 'main/result_search_question.html', context)
 
 
+@login_required
 def create_question(request):
-
     error = ''
     if request.method == "POST":
         form = QuestionForm(request.POST)
@@ -123,31 +118,9 @@ def create_question(request):
 
 
 def question(request, id):
-
     error = ''
 
-    # if request.method == 'PUT':
-    #     # form = AnswerForm()
-    #     form = AnswerForm(request.PUT)
-    #     if form.is_valid():
-    #
-    #         answer = Answer.objects.filter(id=id)
-    #         answer.is_best = True
-    #         answer.save()
-    #
-    #         form = AnswerForm()
-    #         question = Question.objects.get(id=id)
-    #         answers = Answer.objects.filter(question_id=id)
-    #         context = {
-    #             'title': 'Вопрос номер ' + str(id),
-    #             'question': question,
-    #             'answers': answers,
-    #             'form': form,
-    #             'error': error,
-    #         }
-    #         return render(request, 'main/question_with_best_answer.html', context)
-
-    if request.method == 'POST':
+    if request.POST:
         form = AnswerForm(request.POST)
 
         if form.is_valid():
@@ -164,20 +137,41 @@ def question(request, id):
 
     form = AnswerForm()
     question = Question.objects.get(id=id)
-    answers = Answer.objects.filter(question_id=id)
+    answers = Answer.objects.filter(question_id=id, is_best=False)
+    best_answer = Answer.objects.filter(question_id=id, is_best=True)
     context = {
         'title': 'Вопрос номер ' + str(id),
         'question': question,
         'answers': answers,
         'form': form,
         'error': error,
+        'best_answer': best_answer,
     }
     return render(request, 'main/question.html', context)
 
 
-# def question_with_best_answer(request, id):
-#
-#     context = {
-#         'title': 'Вопрос номер ' + str(id),
-#     }
-#     return render(request, 'main/question_with_best_answer.html', context)
+@login_required
+def choose_best_answer(request, id):
+    change_form = UpdateForm()
+    answers = Answer.objects.filter(question_id=id)
+    question = Question.objects.get(id=id)
+    context = {
+        'title': 'Выбор лучшего ответа для вопроса номер ' + str(id),
+        'change_form': change_form,
+        'question': question,
+        'answers': answers,
+    }
+    return render(request, 'main/choose_best_answer.html', context)
+
+
+@login_required
+def change_answer_status(request, id):
+    answer = Answer.objects.get(id=id)
+    answer.is_best = True
+    answer.save()
+
+    question_id = answer.question_id.id
+
+    question = Question.objects.get(id=question_id)
+
+    return redirect('question', id=question.id)

@@ -9,6 +9,7 @@
     <div class="alert alert-success mt-2">
         <h2>{{ question.title }}</h2>
         <p>{{ question.description }}</p>
+        <hr>
         {% if question.author_id != None %}
             <h6>опубликован <strong>{{ question.created_date }}</strong> пользователем <strong>{{ question.author_id }}</strong></h6>
         {% else %}
@@ -17,20 +18,41 @@
     </div>
 
     {% if answers %}
+        {% if best_answer %}
+            <h1>Лучший ответ</h1>
+            {% for element in best_answer %}
+                <div class="alert alert-success mt-2">
+                    {% if element.author_id != None %}
+                         <h2>{{ element.author_id }}</h2>
+                    {% else %}
+                         <h2><i>Страница пользователя недоступна</i></h2>
+                    {% endif %}
+                    <p>{{ element.text }}</p>
+                    <h6>опубликован <strong>{{ element.created_date }}</strong></h6>
+                </div>
+            {% endfor %}
+        {% else %}
+            {% if user.id == question.author_id.id %}
+                <h1>Лучший ответ</h1>
+                <a class="btn btn-success" href="/choose-best-answer/{{ question.id }}">Выбрать лучший ответ</a>
+                <br><br>
+            {% endif %}
+        {% endif %}
+
         <h1>Ответы</h1>
         {% for element in answers %}
-<!--            {% if element.is_best == True %}-->
-<!--                <div class="alert alert-success mt-2">-->
-<!--                    <h7>АВТОР ВОПРОСА ВЫБРАЛ ЭТОТ ОТВЕТ ЛУЧШИМ</h7>-->
-<!--                    {% if element.author_id != None %}-->
-<!--                        <h2>{{ element.author_id }}</h2>-->
-<!--                    {% else %}-->
-<!--                        <h2><i>Страница пользователя недоступна</i></h2>-->
-<!--                    {% endif %}-->
-<!--                    <p>{{ element.text }}</p>-->
-<!--                    <h6>опубликован <strong>{{ element.created_date }}</strong></h6>-->
-<!--                </div>-->
-<!--            {% else %}-->
+            {% if element.is_best == True %}
+                <div class="alert alert-success mt-2">
+                    <h7>АВТОР ВОПРОСА ВЫБРАЛ ЭТОТ ОТВЕТ ЛУЧШИМ</h7>
+                    {% if element.author_id != None %}
+                        <h2>{{ element.author_id }}</h2>
+                    {% else %}
+                        <h2><i>Страница пользователя недоступна</i></h2>
+                    {% endif %}
+                    <p>{{ element.text }}</p>
+                    <h6>опубликован <strong>{{ element.created_date }}</strong></h6>
+                </div>
+            {% else %}
                 <div class="alert alert-warning mt-2">
                     {% if element.author_id != None %}
                         <h2>{{ element.author_id }}</h2>
@@ -39,10 +61,6 @@
                     {% endif %}
                     <p>{{ element.text }}</p>
                     <h6>опубликован <strong>{{ element.created_date }}</strong></h6>
-<!--                    <form method="put">-->
-<!--                        {% csrf_token %}-->
-<!--                        <button type="submit" class="btn btn-outline-success">этот ответ лучший</button>-->
-<!--                    </form>-->
                 </div>
             {% endif %}
         {% endfor %}
