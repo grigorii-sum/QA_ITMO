@@ -10,11 +10,11 @@
         {% for element in extended_users %}
             <div class="alert alert-success mt-2">
                 <h2>{{ element.user_id }}</h2>
-                {% if element.count_answer == 0 or element.count_answer == 1 %}
+                {% if element.count_answer == 1 %}
                     <p>дал <strong>{{ element.count_answer }}</strong> ответ</p>
                 {% elif element.count_answer >= 2 and element.count_answer <= 4 %}
                     <p>дал <strong>{{ element.count_answer }}</strong> ответа</p>
-                {% elif element.count_answer >= 5 %}
+                {% elif element.count_answer == 0 or element.count_answer >= 5 %}
                     <p>дал <strong>{{ element.count_answer }}</strong> ответов</p>
                 {% endif %}
             </div>
