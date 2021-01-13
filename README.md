@@ -1,4 +1,4 @@
-#IMPORTANT
+# IMPORTANT
 pip3 install django
 
 virtualenv venv
@@ -11,7 +11,7 @@ python3 manage.py migrate
 
 python3 manage.py runserver
 
-#NOT IMPORTANT
+# NOT IMPORTANT
 coverage run --source='./main' manage.py test .
 
 coverage report
